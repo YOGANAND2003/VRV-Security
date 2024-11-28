@@ -1,36 +1,38 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
-import { registerUser } from '../services/api';
-import Navbar from './Navbar';
+import { useNavigate } from 'react-router-dom'; // For navigation
+import { registerUser } from '../services/api'; // API call for registration
+import Navbar from './Navbar'; // Navbar component
 
 const Register = () => {
-    const [form, setForm] = useState({ username: '', email: '', password: '', role: 'User' });
-    const navigate = useNavigate(); // Initialize useNavigate
+    const [form, setForm] = useState({ username: '', email: '', password: '', role: 'User' }); // Form state
+    const navigate = useNavigate(); // For programmatic navigation
 
+    // Handles form submission
     const handleSubmit = async (e) => {
-        e.preventDefault();
+        e.preventDefault(); // Prevent default form submission
         try {
-            await registerUser(form);
+            await registerUser(form); // API call to register user
             alert('Registration successful!');
-            navigate('/login'); // Navigate to login page after successful registration
+            navigate('/login'); // Redirect to login page on success
         } catch (err) {
-            alert('Error: ' + err.response.data.error);
+            alert('Error: ' + err.response.data.error); // Display error message
         }
     };
 
+    // Redirects to login page when "Already have an account?" is clicked
     const handleLoginClick = () => {
-        navigate('/login'); // Navigate to the login page when "Already have an account? Login" is clicked
+        navigate('/login');
     };
 
     return (
         <div>
-            <Navbar />
+            <Navbar /> {/* Navbar for consistent navigation */}
 
             <div className="flex justify-center items-center min-h-screen bg-gray-100">
-
                 <div className="w-full max-w-md p-8 bg-[#0e4112] rounded-lg shadow-lg">
                     <h2 className="text-2xl font-bold text-center mb-6 text-white">Register</h2>
                     <form onSubmit={handleSubmit} className="space-y-4">
+                        {/* Username Field */}
                         <div>
                             <input
                                 type="text"
@@ -40,6 +42,7 @@ const Register = () => {
                                 className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                             />
                         </div>
+                        {/* Email Field */}
                         <div>
                             <input
                                 type="email"
@@ -49,6 +52,7 @@ const Register = () => {
                                 className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                             />
                         </div>
+                        {/* Password Field */}
                         <div>
                             <input
                                 type="password"
@@ -58,6 +62,7 @@ const Register = () => {
                                 className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                             />
                         </div>
+                        {/* Role Selection Dropdown */}
                         <div>
                             <select
                                 value={form.role}
@@ -69,6 +74,7 @@ const Register = () => {
                                 <option value="Moderator">Moderator</option>
                             </select>
                         </div>
+                        {/* Register Button */}
                         <div>
                             <button
                                 type="submit"
@@ -79,6 +85,7 @@ const Register = () => {
                         </div>
                     </form>
 
+                    {/* Login Redirect */}
                     <div className="mt-4 text-center">
                         <span className="text-white">
                             Already have an account?{' '}

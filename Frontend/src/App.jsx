@@ -18,9 +18,6 @@ const App = () => {
 
     return (
         <Router>
-            {/* Optionally, you can include Navbar on every page */}
-            {/* <Navbar /> */}
-
             <Routes>
                 {/* Default landing page */}
                 <Route
